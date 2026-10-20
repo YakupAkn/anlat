@@ -1,0 +1,15 @@
+[project]
+name = "anlat"
+version = "0.2.0"
+description = "Explains in plain language what a suspicious file does, using a container sandbox and fake honeytoken data."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+anlat = "anlat.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
