@@ -1,6 +1,7 @@
 """Runs the file in a locked-down Docker container and returns the trace."""
 import shutil
 import subprocess
+import os
 import tempfile
 from pathlib import Path
 
@@ -28,7 +29,8 @@ def run(sample: Path, timeout: int = 30, ram_gb: int = 16, spoof: bool = True):
     out.mkdir()
     markers = honey.build(home)
     # container user "user" must be able to write in its fake home
-    subprocess.run(["chmod", "-R", "a+rwX", str(home), str(out)])
+    if os.name != "nt":
+        subprocess.run(["chmod", "-R", "a+rwX", str(home), str(out)])
     cmd = [
         "docker", "run", "--rm",
         "--network", "none",
